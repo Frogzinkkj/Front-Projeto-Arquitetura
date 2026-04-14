@@ -1,19 +1,19 @@
 <section class="page">
-	<header class="page-header">
-		<div>
-			<h2>Monitorias</h2>
-			<p class="subtitle">Acompanhe monitorias em andamento e finalize com parecer.</p>
-		</div>
-	</header>
+  <header class="page-header">
+    <div>
+      <h2>Monitorias</h2>
+      <p class="subtitle">Acompanhe monitorias em andamento e finalize com parecer.</p>
+    </div>
+  </header>
 
-	<section class="card">
-		<p>
-			Esta área está preparada para receber os lançamentos de monitoria do professor orientador,
-			com indicadores por semestre e disciplina.
-		</p>
-		<div class="actions">
-			<button class="btn btn-primary" type="button">Nova monitoria</button>
-			<button class="btn btn-ghost" type="button">Ver histórico</button>
-		</div>
-	</section>
+  <section class="card">
+    <p>
+      Esta área está preparada para receber os lançamentos de monitoria do professor orientador,
+      com indicadores por semestre e disciplina.
+    </p>
+    <div class="actions">
+      <button class="btn btn-primary" type="button" (click)="novaMonitoria()">Nova monitoria</button>
+      <button class="btn btn-ghost" type="button" (click)="verHistorico()">Ver histórico</button>
+    </div>
+  </section>
 </section>

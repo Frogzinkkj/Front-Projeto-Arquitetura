@@ -48,4 +48,55 @@ export class AuthService {
     if (!this.isBrowser()) return null;
     return localStorage.getItem(this.TOKEN_KEY);
   }
+
+  decodeToken(): any | null {
+    const token = this.getToken();
+    if (!token || typeof window === 'undefined') return null;
+
+    try {
+      const parts = token.split('.');
+      if (parts.length < 2) return null;
+
+      const payload = parts[1];
+
+      // atob may throw for malformed base64; try to parse safely
+      const decoded = (() => {
+        try {
+          return JSON.parse(window.atob(payload));
+        } catch {
+          try {
+            // handle unicode
+            return JSON.parse(decodeURIComponent(escape(window.atob(payload))));
+          } catch {
+            return null;
+          }
+        }
+      })();
+
+      return decoded;
+    } catch {
+      return null;
+    }
+  }
+
+  getUserRoles(): string[] {
+    const payload = this.decodeToken();
+    if (!payload) return [];
+
+    // Try common claim names
+    const maybe = payload.roles ?? payload.role ?? payload.authorities ?? payload.authoritiesList ?? null;
+
+    if (!maybe) return [];
+
+    if (Array.isArray(maybe)) {
+      return maybe.map(String);
+    }
+
+    if (typeof maybe === 'string') {
+      // comma separated or single
+      return maybe.includes(',') ? maybe.split(',').map(s => s.trim()) : [maybe];
+    }
+
+    return [];
+  }
 }

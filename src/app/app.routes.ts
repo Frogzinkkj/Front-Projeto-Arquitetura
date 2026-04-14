@@ -18,5 +18,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/admin/admin-module').then(m => m.AdminModule)
   },
+  {
+    path: 'professor',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./features/professor/professor-module').then(m => m.ProfessorModule)
+  },
   
 ];

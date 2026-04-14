@@ -30,6 +30,15 @@ export class LoginComponent {
         this.loading = false;
 
         if (success) {
+          const roles = this.authService.getUserRoles();
+
+          const isProfessor = roles.some(r => /prof/i.test(r));
+
+          if (isProfessor) {
+            this.router.navigate(['/professor']);
+            return;
+          }
+
           this.router.navigate(['/admin']);
           return;
         }
@@ -51,6 +60,14 @@ export class LoginComponent {
   ngOnInit() {
     if (typeof window !== 'undefined') {
       if (this.authService.isAuthenticated()) {
+        const roles = this.authService.getUserRoles();
+        const isProfessor = roles.some(r => /prof/i.test(r));
+
+        if (isProfessor) {
+          this.router.navigate(['/professor']);
+          return;
+        }
+
         this.router.navigate(['/admin']);
       }
     }
