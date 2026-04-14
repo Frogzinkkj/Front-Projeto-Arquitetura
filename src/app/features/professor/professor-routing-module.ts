@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Importe seus componentes (ajuste o caminho se necessário)
-import { Monitoria } from './monitoria/monitoria'; // Exemplo de caminho
-import { Relatorios } from './relatorios/relatorios'; // Exemplo de caminho
+import { Monitoria } from './pages/monitoria/monitoria';
+import { Relatorios } from './pages/relatorios/relatorios';
 
 const routes: Routes = [
   { 

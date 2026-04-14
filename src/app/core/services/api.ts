@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { ApiEnvelope } from '../models/api-envelope.model';
 import { BackendError, BackendValidationError } from '../models/backend-error.model';
 import { PageResponse } from '../models/paginated-response.model';

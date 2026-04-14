@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api.service'; // Ajuste o caminho
+import { Api } from '../../../../core/services/api';
 
 @Component({
   selector: 'app-monitoria',
@@ -12,7 +12,7 @@ import { ApiService } from '../services/api.service'; // Ajuste o caminho
 export class Monitoria {
   // Injeção de dependência moderna do Angular
   private router = inject(Router);
-  private apiService = inject(ApiService);
+  private apiService = inject(Api);
 
   novaMonitoria() {
     // Exemplo: Navegar para uma tela de formulário ou abrir um modal
@@ -21,7 +21,7 @@ export class Monitoria {
     
     /* Exemplo chamando a API:
     const payload = { ... };
-    this.apiService.criarMonitoria(payload).subscribe({
+    this.apiService.create('/monitorias', payload).subscribe({
       next: (res) => alert('Monitoria criada!'),
       error: (err) => console.error('Erro:', err)
     });
