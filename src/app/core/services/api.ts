@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 import { ApiEnvelope } from '../models/api-envelope.model';
 import { BackendError, BackendValidationError } from '../models/backend-error.model';
 import { PageResponse } from '../models/paginated-response.model';
@@ -11,7 +12,7 @@ import { PageResponse } from '../models/paginated-response.model';
 export class Api {
 
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = '/api';
+  private readonly baseUrl = this.resolveBaseUrl();
 
   list<T>(path: string, params: Record<string, unknown> = {}): Observable<PageResponse<T>> {
     return this.http
@@ -112,11 +113,15 @@ export class Api {
   }
 
   private url(path: string): string {
-    if (path.startsWith('/auth') || path.startsWith('/monitorias') || path.startsWith('/api')) {
-      return path;
+    const route = path.startsWith('/auth') || path.startsWith('/monitorias') || path.startsWith('/api')
+      ? path
+      : `/api${path.startsWith('/') ? path : `/${path}`}`;
+
+    if (this.shouldUseRelativeUrl()) {
+      return route;
     }
 
-    return `${this.baseUrl}${path}`;
+    return `${this.baseUrl}${route}`;
   }
 
   private urlWithoutApiPrefix(path: string): string {
@@ -129,6 +134,18 @@ export class Api {
       && !path.startsWith('/api')
       && !path.startsWith('/auth')
       && !path.startsWith('/monitorias');
+  }
+
+  private resolveBaseUrl(): string {
+    return environment.apiUrl.replace(/\/$/, '');
+  }
+
+  private shouldUseRelativeUrl(): boolean {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   }
 
   private unwrap<T>(response: unknown): T {
