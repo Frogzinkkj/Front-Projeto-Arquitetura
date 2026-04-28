@@ -1,0 +1,81 @@
+<section class="page">
+	<header class="page-header">
+		<div>
+			<h2>Cadastro de Professor</h2>
+			<p class="subtitle">Vincule o docente a uma escola e mantenha status atualizado.</p>
+		</div>
+	</header>
+
+	@if (errorMessage) {
+		<p class="feedback feedback-error">{{ errorMessage }}</p>
+	}
+
+	<form class="card form-grid" (ngSubmit)="salvar()">
+		<label class="field">
+			Matrícula
+			<input [(ngModel)]="matricula" name="matricula" placeholder="PROF001" />
+			@if (fieldErrors['matricula']) {
+				<small class="feedback feedback-error">{{ fieldErrors['matricula'] }}</small>
+			}
+		</label>
+
+		<label class="field">
+			Nome completo
+			<input [(ngModel)]="nome" name="nome" placeholder="Nome completo" />
+			@if (fieldErrors['nome']) {
+				<small class="feedback feedback-error">{{ fieldErrors['nome'] }}</small>
+			}
+		</label>
+
+		<label class="field">
+			E-mail
+			<input [(ngModel)]="email" name="email" type="email" placeholder="professor@exemplo.com" />
+			@if (fieldErrors['email']) {
+				<small class="feedback feedback-error">{{ fieldErrors['email'] }}</small>
+			}
+		</label>
+
+		<label class="field">
+			Telefone
+			<input [(ngModel)]="telefone" name="telefone" placeholder="(71) 99999-9999" />
+			@if (fieldErrors['telefone']) {
+				<small class="feedback feedback-error">{{ fieldErrors['telefone'] }}</small>
+			}
+		</label>
+
+		<label class="field field--full">
+			Titulação
+			<input [(ngModel)]="titulacao" name="titulacao" placeholder="Ex.: Mestre" />
+			@if (fieldErrors['titulacao']) {
+				<small class="feedback feedback-error">{{ fieldErrors['titulacao'] }}</small>
+			}
+		</label>
+
+		<label class="field">
+			Escola
+			<select [(ngModel)]="escolaId" name="escolaId">
+				<option [ngValue]="0">Selecione uma escola</option>
+				@for (escola of escolaOptions; track escola.id) {
+					<option [ngValue]="escola.id">{{ escola.nome }}</option>
+				}
+			</select>
+			@if (fieldErrors['escolaId']) {
+				<small class="feedback feedback-error">{{ fieldErrors['escolaId'] }}</small>
+			}
+		</label>
+
+		<label class="field">
+			Status
+			<select [(ngModel)]="status" name="status">
+				<option value="ATIVO">ATIVO</option>
+				<option value="INATIVO">INATIVO</option>
+				<option value="ENCERRADO">ENCERRADO</option>
+			</select>
+		</label>
+
+		<div class="actions field--full">
+			<button class="btn btn-primary" type="submit">Salvar</button>
+			<a class="btn btn-ghost" routerLink="/admin/professor">Voltar</a>
+		</div>
+	</form>
+</section>

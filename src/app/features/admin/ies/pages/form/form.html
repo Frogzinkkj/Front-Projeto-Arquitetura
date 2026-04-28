@@ -1,0 +1,52 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h2>Cadastro de IES</h2>
+      <p class="subtitle">Preencha os dados institucionais para criar ou editar uma IES.</p>
+    </div>
+  </header>
+
+  @if (errorMessage) {
+    <p class="feedback feedback-error">{{ errorMessage }}</p>
+  }
+
+  <form class="card form-grid" (ngSubmit)="salvar()">
+    <label class="field field--full">
+      Nome da instituição
+      <input [(ngModel)]="nome" name="nome" placeholder="Ex.: Universidade Católica do Salvador" />
+      @if (fieldErrors['nome']) {
+        <small class="feedback feedback-error">{{ fieldErrors['nome'] }}</small>
+      }
+    </label>
+
+    <label class="field field--full">
+      Endereço
+      <input [(ngModel)]="endereco" name="endereco" placeholder="Rua, número, bairro e cidade" />
+      @if (fieldErrors['endereco']) {
+        <small class="feedback feedback-error">{{ fieldErrors['endereco'] }}</small>
+      }
+    </label>
+
+    <label class="field">
+      Telefone
+      <input [(ngModel)]="telefone" name="telefone" placeholder="(71) 99999-9999" />
+      @if (fieldErrors['telefone']) {
+        <small class="feedback feedback-error">{{ fieldErrors['telefone'] }}</small>
+      }
+    </label>
+
+    <label class="field">
+      Status
+      <select [(ngModel)]="status" name="status">
+        <option value="ATIVO">ATIVO</option>
+        <option value="INATIVO">INATIVO</option>
+        <option value="ENCERRADO">ENCERRADO</option>
+      </select>
+    </label>
+
+    <div class="actions field--full">
+      <button class="btn btn-primary" type="submit">Salvar</button>
+      <a class="btn btn-ghost" routerLink="/admin/ies">Voltar</a>
+    </div>
+  </form>
+</section>

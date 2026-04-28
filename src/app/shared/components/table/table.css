@@ -1,0 +1,72 @@
+.table-wrap {
+	overflow-x: auto;
+	border: 1px solid #dde4e4;
+	border-radius: 14px;
+	background: #fff;
+}
+
+.table-empty {
+	padding: 20px;
+	text-align: center;
+	color: #5f6d72;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 760px;
+}
+
+th,
+td {
+	padding: 11px 12px;
+	text-align: left;
+	border-bottom: 1px solid #edf1f1;
+	font-size: 0.92rem;
+}
+
+th {
+	background: #f4fbfa;
+	color: #2d4f55;
+	font-family: 'Space Grotesk', sans-serif;
+	font-weight: 700;
+}
+
+tbody tr:hover {
+	background: #fbfdfd;
+}
+
+.th-actions,
+.td-actions {
+	min-width: 190px;
+}
+
+.td-actions {
+	display: flex;
+	gap: 8px;
+}
+
+.skeleton-line,
+.skeleton-pill {
+	display: inline-block;
+	height: 12px;
+	width: 100%;
+	border-radius: 999px;
+	background: linear-gradient(90deg, #edf2f2, #f7f9f9, #edf2f2);
+	background-size: 240% 100%;
+	animation: pulse 1.2s infinite;
+}
+
+.skeleton-pill {
+	height: 34px;
+	width: 148px;
+}
+
+@keyframes pulse {
+	from {
+		background-position: 200% 0;
+	}
+	to {
+		background-position: -40% 0;
+	}
+}

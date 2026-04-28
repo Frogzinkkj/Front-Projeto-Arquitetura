@@ -1,0 +1,31 @@
+<section class="login-page">
+  <article class="login-copy card">
+    <p class="login-kicker">Sistema de Controle de Monitoria</p>
+    <h2>Gestão acadêmica em um painel só</h2>
+    <p>
+      Acompanhe escolas, cursos, professores, disciplinas e matrizes em uma interface limpa,
+      responsiva e preparada para o backend oficial.
+    </p>
+  </article>
+
+  <article class="card login-card">
+    <header>
+      <h3>Acessar painel</h3>
+      <p class="subtitle">Use seu usuário e senha para entrar.</p>
+    </header>
+
+    <form (ngSubmit)="login()" class="login-form">
+      <label class="field">
+        Usuário
+        <input type="text" [(ngModel)]="username" name="username" placeholder="seu.usuario" />
+      </label>
+
+      <label class="field">
+        Senha
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Sua senha" />
+      </label>
+
+      <button class="btn btn-primary" type="submit">Entrar</button>
+    </form>
+  </article>
+</section>

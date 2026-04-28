@@ -1,0 +1,50 @@
+<div class="table-wrap">
+  @if (loading) {
+    <table>
+      <thead>
+        <tr>
+          @for (column of columns; track column.key) {
+            <th>{{ column.label }}</th>
+          }
+          <th class="th-actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (_ of [1,2,3,4,5]; track $index) {
+          <tr>
+            @for (_column of columns; track $index) {
+              <td><span class="skeleton-line"></span></td>
+            }
+            <td class="td-actions"><span class="skeleton-pill"></span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else if (data.length === 0) {
+    <div class="table-empty">Nenhum registro encontrado com os filtros atuais.</div>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          @for (column of columns; track column.key) {
+            <th>{{ column.label }}</th>
+          }
+          <th class="th-actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of data; track item.id) {
+          <tr>
+            @for (column of columns; track column.key) {
+              <td>{{ item[column.key] }}</td>
+            }
+            <td class="td-actions">
+              <button class="btn btn-secondary" (click)="editar.emit(item.id)">Editar</button>
+              <button class="btn btn-danger" (click)="inativar.emit(item.id)">Inativar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

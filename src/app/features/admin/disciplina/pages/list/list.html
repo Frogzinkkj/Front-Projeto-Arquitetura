@@ -1,0 +1,43 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h2>Disciplinas</h2>
+      <p class="subtitle">Controle carga horária e vínculo das disciplinas com escolas.</p>
+    </div>
+    <a class="btn btn-primary" routerLink="/admin/disciplina/form">Nova Disciplina</a>
+  </header>
+
+  <section class="card toolbar">
+    <div class="filters-grid">
+      <label class="field">
+        Status
+        <select [(ngModel)]="filtroStatus">
+          <option value="">Todos</option>
+          <option value="ATIVO">ATIVO</option>
+          <option value="INATIVO">INATIVO</option>
+          <option value="ENCERRADO">ENCERRADO</option>
+        </select>
+      </label>
+      <div class="actions">
+        <button class="btn btn-secondary" type="button" (click)="aplicarFiltro()">Aplicar filtros</button>
+      </div>
+    </div>
+  </section>
+
+  @if (errorMessage) {
+    <p class="feedback feedback-error">{{ errorMessage }}</p>
+  }
+
+  <app-table [loading]="loading" [data]="disciplinas" [columns]="columns" (editar)="editar($event)" (inativar)="inativar($event)">
+  </app-table>
+
+  <footer class="card pagination">
+    <div class="actions">
+      <button class="btn btn-ghost" type="button" (click)="paginaAnterior()" [disabled]="page === 0">Anterior</button>
+      <button class="btn btn-ghost" type="button" (click)="proximaPagina()" [disabled]="page + 1 >= totalPages">
+        Próxima
+      </button>
+    </div>
+    <p>Página {{ page + 1 }} de {{ totalPages || 1 }}</p>
+  </footer>
+</section>

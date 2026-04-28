@@ -1,0 +1,57 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h2>Cadastro de Escola</h2>
+      <p class="subtitle">Toda escola deve estar vinculada a uma IES.</p>
+    </div>
+  </header>
+
+  @if (errorMessage) {
+    <p class="feedback feedback-error">{{ errorMessage }}</p>
+  }
+
+  <form class="card form-grid" (ngSubmit)="salvar()">
+    <label class="field">
+      Nome da escola
+      <input type="text" [(ngModel)]="nome" name="nome" placeholder="Ex.: Escola de Engenharias" />
+      @if (fieldErrors['nome']) {
+        <small class="feedback feedback-error">{{ fieldErrors['nome'] }}</small>
+      }
+    </label>
+
+    <label class="field">
+      Coordenador
+      <input type="text" [(ngModel)]="coordenador" name="coordenador" placeholder="Nome do coordenador" />
+      @if (fieldErrors['coordenador']) {
+        <small class="feedback feedback-error">{{ fieldErrors['coordenador'] }}</small>
+      }
+    </label>
+
+    <label class="field">
+      IES vinculada
+      <select [(ngModel)]="iesId" name="iesId">
+        <option [ngValue]="0">Selecione uma IES</option>
+        @for (ies of iesOptions; track ies.id) {
+          <option [ngValue]="ies.id">{{ ies.nome }}</option>
+        }
+      </select>
+      @if (fieldErrors['iesId']) {
+        <small class="feedback feedback-error">{{ fieldErrors['iesId'] }}</small>
+      }
+    </label>
+
+    <label class="field">
+      Status
+      <select [(ngModel)]="status" name="status">
+        <option value="ATIVO">ATIVO</option>
+        <option value="INATIVO">INATIVO</option>
+        <option value="ENCERRADO">ENCERRADO</option>
+      </select>
+    </label>
+
+    <div class="actions field--full">
+      <button class="btn btn-primary" type="submit">Salvar</button>
+      <a class="btn btn-ghost" routerLink="/admin/escola">Voltar</a>
+    </div>
+  </form>
+</section>

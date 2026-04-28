@@ -1,0 +1,66 @@
+.topbar {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	gap: 14px;
+	padding: 12px 18px;
+	background: rgba(255, 255, 255, 0.86);
+	border-bottom: 1px solid rgba(15, 118, 110, 0.18);
+	backdrop-filter: blur(12px);
+}
+
+.topbar-brand {
+	display: grid;
+	line-height: 1.1;
+}
+
+.topbar-brand strong {
+	font-family: 'Space Grotesk', sans-serif;
+	color: #0b5c56;
+	font-size: 1rem;
+}
+
+.topbar-brand span {
+	color: #6c7d82;
+	font-size: 0.75rem;
+}
+
+.topbar-links {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	overflow-x: auto;
+	padding: 4px;
+}
+
+.topbar-links a {
+	color: #33484f;
+	text-decoration: none;
+	font-size: 0.84rem;
+	font-weight: 700;
+	padding: 8px 12px;
+	border-radius: 999px;
+	white-space: nowrap;
+	transition: background-color 150ms ease, color 150ms ease;
+}
+
+.topbar-links a:hover,
+.topbar-links a.active {
+	background: #e5f7f5;
+	color: #0b5c56;
+}
+
+@media (max-width: 900px) {
+	.topbar {
+		grid-template-columns: 1fr;
+		gap: 10px;
+		padding: 12px;
+	}
+
+	.topbar .btn {
+		justify-self: end;
+	}
+}

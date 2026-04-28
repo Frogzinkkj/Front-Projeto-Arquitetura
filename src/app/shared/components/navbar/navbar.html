@@ -1,0 +1,20 @@
+<nav class="topbar">
+  <div class="topbar-brand">
+    <strong>COREI5 Monitoria</strong>
+    <span>Painel Acadêmico</span>
+  </div>
+
+  <div class="topbar-links">
+    <a routerLink="/admin" routerLinkActive="active">Início</a>
+    <a routerLink="/admin/ies" routerLinkActive="active">IES</a>
+    <a routerLink="/admin/escola" routerLinkActive="active">Escolas</a>
+    <a routerLink="/admin/professor" routerLinkActive="active">Professores</a>
+    <a routerLink="/admin/curso" routerLinkActive="active">Cursos</a>
+    <a routerLink="/admin/disciplina" routerLinkActive="active">Disciplinas</a>
+    <a routerLink="/admin/matriz" routerLinkActive="active">Matrizes</a>
+  </div>
+
+  @if (isLogged()) {
+    <button class="btn btn-danger" (click)="logout()">Sair</button>
+  }
+</nav>

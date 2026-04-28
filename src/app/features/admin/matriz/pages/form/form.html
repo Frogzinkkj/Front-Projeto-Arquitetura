@@ -1,0 +1,90 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h2>Cadastro de Matriz</h2>
+      <p class="subtitle">Vincule matriz ao curso e associe disciplinas com pré-requisitos.</p>
+    </div>
+  </header>
+
+  @if (errorMessage) {
+    <p class="feedback feedback-error">{{ errorMessage }}</p>
+  }
+
+  <form class="card form-grid" (ngSubmit)="salvar()">
+    <label class="field">
+      Nome da matriz
+      <input [(ngModel)]="nome" name="nome" placeholder="Matriz 2026.1" />
+      @if (fieldErrors['nome']) {
+        <small class="feedback feedback-error">{{ fieldErrors['nome'] }}</small>
+      }
+    </label>
+
+    <label class="field field--full">
+      Descrição
+      <input [(ngModel)]="descricao" name="descricao" placeholder="Descrição da matriz curricular" />
+      @if (fieldErrors['descricao']) {
+        <small class="feedback feedback-error">{{ fieldErrors['descricao'] }}</small>
+      }
+    </label>
+
+    <label class="field">
+      Curso
+      <select [(ngModel)]="cursoId" name="cursoId">
+        <option [ngValue]="0">Selecione um curso</option>
+        @for (curso of cursoOptions; track curso.id) {
+          <option [ngValue]="curso.id">{{ curso.sigla }}</option>
+        }
+      </select>
+      @if (fieldErrors['cursoId']) {
+        <small class="feedback feedback-error">{{ fieldErrors['cursoId'] }}</small>
+      }
+    </label>
+
+    <label class="field">
+      Status
+      <select [(ngModel)]="status" name="status">
+        <option value="ATIVO">ATIVO</option>
+        <option value="INATIVO">INATIVO</option>
+        <option value="ENCERRADO">ENCERRADO</option>
+      </select>
+    </label>
+
+    <div class="actions field--full">
+      <button class="btn btn-primary" type="submit">Salvar</button>
+      <a class="btn btn-ghost" routerLink="/admin/matriz">Voltar</a>
+    </div>
+  </form>
+
+  @if (id) {
+    <section class="card form-grid">
+      <h3 class="field--full">Associar disciplina à matriz</h3>
+
+      <label class="field">
+        Disciplina
+        <select [(ngModel)]="disciplinaId" name="disciplinaId">
+          <option [ngValue]="0">Selecione uma disciplina</option>
+          @for (disciplina of disciplinaOptions; track disciplina.id) {
+            <option [ngValue]="disciplina.id">{{ disciplina.sigla }}</option>
+          }
+        </select>
+        @if (fieldErrors['disciplinaId']) {
+          <small class="feedback feedback-error">{{ fieldErrors['disciplinaId'] }}</small>
+        }
+      </label>
+
+      <label class="field">
+        Pré-requisito
+        <select [(ngModel)]="preRequisitoId" name="preRequisitoId">
+          <option [ngValue]="null">Sem pré-requisito</option>
+          @for (disciplina of disciplinaOptions; track disciplina.id) {
+            <option [ngValue]="disciplina.id">{{ disciplina.sigla }}</option>
+          }
+        </select>
+      </label>
+
+      <div class="actions field--full">
+        <button class="btn btn-secondary" type="button" (click)="associarDisciplina()">Associar disciplina</button>
+      </div>
+    </section>
+  }
+</section>
